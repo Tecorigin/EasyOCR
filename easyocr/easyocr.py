@@ -91,7 +91,7 @@ class Reader(object):
         self.quantize=quantize, 
         self.cudnn_benchmark=cudnn_benchmark
         if detector:
-            detector_path = self.getDistributedDataParallel(detect_network)
+            detector_path = self.getDetectorPath(detect_network)
         
         # recognition model
         separator_list = {}
