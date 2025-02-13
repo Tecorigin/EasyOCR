@@ -10,6 +10,12 @@ from bidi import get_display
 import numpy as np
 import cv2
 import torch
+
+try:
+    import intel_extension_for_pytorch as ipex
+except Exception:
+    pass
+
 import os
 import sys
 from PIL import Image
@@ -72,10 +78,10 @@ class Reader(object):
         elif gpu is True:
             if torch.cuda.is_available():
                 self.device = 'cuda'
-            elif torch.xpu.is_available():
-                self.device = 'xpu'
             elif torch.backends.mps.is_available():
                 self.device = 'mps'
+            elif torch.xpu.is_available():
+                self.device = 'xpu'
             else:
                 self.device = 'cpu'
                 if verbose:
