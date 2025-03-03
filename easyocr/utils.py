@@ -627,7 +627,7 @@ def download_and_unzip(url, filename, model_storage_directory, verbose=True):
     reporthook = printProgressBar(prefix='Progress:', suffix='Complete', length=50) if verbose else None
     urlretrieve(url, zip_path, reporthook=reporthook)
     with ZipFile(zip_path, 'r') as zipObj:
-        zipObj.extract(filename, model_storage_directory)
+        zipObj.extractall(model_storage_directory)
     os.remove(zip_path)
 
 def calculate_md5(fname):

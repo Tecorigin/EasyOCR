@@ -23,6 +23,11 @@ detection_models = {
         'filename': 'pretrained_ic15_res50.pt',
         'url': 'https://github.com/JaidedAI/EasyOCR/releases/download/v1.6.0/pretrained_ic15_res50.zip',
         'md5sum': 'a8e90144c131c2467d1eb7886c2e93a6'
+    },
+    'craft_ov_int8': {
+        'filename': 'CRAFT-detector_int8.xml',
+        'url': 'https://github.com/avbelova/EasyOCR/releases/download/v1.0.0/CRAFT-detector_int8.zip',
+        'md5sum': '3789b097bab80ac15c8440d32c35b9a2'
     }
 }
 

@@ -94,10 +94,14 @@ def get_detector(trained_model, device='cpu', quantize=True, cudnn_benchmark=Fal
                 pass
         net.eval()
     elif 'ov_' in device:
-        ov_device=re.sub('ov_','',device).upper()
-        net.load_state_dict(copyStateDict(torch.load(trained_model, map_location='cpu')))
-        dummy_inp = torch.rand(1, 3, 608, 800)
-        net_ov = ov.convert_model(net, example_input=dummy_inp)
+        if 'int8' in device:
+            ov_device=re.sub('ov_','',device).upper()[:-5]
+            net_ov=trained_model
+        else:
+            ov_device=re.sub('ov_','',device).upper()
+            net.load_state_dict(copyStateDict(torch.load(trained_model, map_location='cpu')))
+            dummy_inp = torch.rand(1, 3, 608, 800)
+            net_ov = ov.convert_model(net, example_input=dummy_inp)
         core = ov.Core()
         if 'GPU' in ov_device:
             cache_dir=os.path.expanduser('~/.EasyOCR/cache')

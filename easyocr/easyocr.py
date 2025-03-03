@@ -85,9 +85,11 @@ class Reader(object):
         self.recognition_models = recognition_models
 
         # check and download detection model
-        self.support_detection_network = ['craft', 'dbnet18']
+        self.support_detection_network = ['craft', 'dbnet18', 'craft_ov_int8']
         self.quantize=quantize, 
         self.cudnn_benchmark=cudnn_benchmark
+        if 'ov' and 'int8' in self.device:
+            detect_network='craft_ov_int8'
         if detector:
             detector_path = self.getDetectorPath(detect_network)
         
@@ -235,7 +237,7 @@ class Reader(object):
     def getDetectorPath(self, detect_network):
         if detect_network in self.support_detection_network:
             self.detect_network = detect_network
-            if self.detect_network == 'craft':
+            if self.detect_network == 'craft' or self.detect_network == 'craft_ov_int8':
                 from .detection import get_detector, get_textbox
             elif self.detect_network in ['dbnet18']:
                 from .detection_db import get_detector, get_textbox

@@ -198,7 +198,10 @@ def get_recognizer(recog_network, network_params, character,\
         state_dict = torch.load(model_path, map_location="cpu")
         new_state_dict = copyStateDict(state_dict)
         model.load_state_dict(new_state_dict)
-        ov_device = re.sub('ov_','',device).upper()
+        if 'int8' in device:
+            ov_device=re.sub('ov_','',device).upper()[:-5]
+        else:
+            ov_device = re.sub('ov_','',device).upper()
         core = ov.Core()
         if 'GPU' in ov_device:
             cache_dir = os.path.expanduser('~/.EasyOCR/cache')
