@@ -132,7 +132,10 @@ Running inference on OpenVINO+Intel(R) Discrete Graphics:
 ```python
 reader = easyocr.Reader(['ch_sim','en'], 'ov_gpu.1')
 ```
-
+To accelerate the OCR you can run CRAFT model in INT8 format. To do that just add "_int8" to the device name. CRAFT model is quantized using [NNCF](https://github.com/openvinotoolkit/nncf) framework, quantization script is [here](https://github.com/avbelova/EasyOCR/blob/feature/openvino-backend/easyocr/quantize_craft_default.py).
+```python
+reader = easyocr.Reader(['ch_sim','en'], 'ov_cpu_int8')
+```
 #### Run on command line
 
 ```shell
