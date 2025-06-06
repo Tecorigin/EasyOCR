@@ -1,3 +1,7 @@
+- 24 September 2024 - Version 1.7.2
+    - Fix several compatibilities
+- 4 September 2023 - Version 1.7.1
+    - Fix several compatibilities
 - 25 May 2023 - Version 1.7.0
     - Add Apple Silicon support (thanks[@rayeesoft](https://github.com/rayeesoft) and [@ArtemBernatskyy](https://github.com/ArtemBernatskyy), see [PR](https://github.com/JaidedAI/EasyOCR/pull/1004))
     - Fix several compatibilities
