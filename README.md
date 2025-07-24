@@ -38,18 +38,18 @@ Install using `pip`
 For the latest stable release:
 
 ``` bash
-pip install easyocr
+pip install easyocr-1.7.2-py3-none-any.whl
 ```
 
 For the latest development release:
 
 ``` bash
-pip install git+https://github.com/JaidedAI/EasyOCR.git
+pip install git+https://github.com/Tecorigin/EasyOCR.git
 ```
 
 Note 1: For Windows, please install torch and torchvision first by following the official instructions here https://pytorch.org. On the pytorch website, be sure to select the right CUDA version you have. If you intend to run on CPU mode only, select `CUDA = None`.
 
-Note 2: We also provide a Dockerfile [here](https://github.com/JaidedAI/EasyOCR/blob/master/Dockerfile).
+Note 2: We also provide a Dockerfile [here](https://github.com/Tecorigin/EasyOCR/blob/master/Dockerfile).
 
 ## Usage
 
