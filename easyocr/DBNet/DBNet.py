@@ -24,7 +24,7 @@ class DBNet:
                  weight_name = 'pretrained',
                  initialize_model = True,
                  dynamic_import_relative_path = None,
-                 device = 'cuda', 
+                 device = 'sdaa', 
                  verbose = 0):
         '''
         DBNet text detector class
@@ -155,7 +155,7 @@ class DBNet:
         '''
         if self.model is None:
             raise RuntimeError("model has not yet been constructed.")
-        self.model.load_state_dict(torch.load(weight_path, map_location=self.device), strict=False)
+        self.model.load_state_dict(torch.load(weight_path, map_location=self.device, weights_only=False), strict=False)
         self.model.eval()
         
     def construct_model(self, config):
@@ -191,8 +191,7 @@ class DBNet:
         '''
         self.construct_model(model_config)
         self.load_weight(weight_path)
-        if isinstance(self.model.model, torch.nn.DataParallel) and self.device == 'cpu':
-            self.model.model = self.model.model.module.to(self.device)    
+        self.model.model = self.model.model.to(self.device)
 
     def get_cv2_image(self, image):
         '''

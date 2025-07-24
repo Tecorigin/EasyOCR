@@ -623,6 +623,7 @@ def get_image_list(horizontal_list, free_list, img, model_height = 64, sort_outp
     return image_list, max_width
 
 def download_and_unzip(url, filename, model_storage_directory, verbose=True):
+    print("Downloading model from {}...".format(url))
     zip_path = os.path.join(model_storage_directory, 'temp.zip')
     reporthook = printProgressBar(prefix='Progress:', suffix='Complete', length=50) if verbose else None
     urlretrieve(url, zip_path, reporthook=reporthook)

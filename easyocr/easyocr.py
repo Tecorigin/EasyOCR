@@ -74,10 +74,12 @@ class Reader(object):
                 self.device = 'cuda'
             elif torch.backends.mps.is_available():
                 self.device = 'mps'
+            elif torch.sdaa.is_available():
+                self.device = 'sdaa'
             else:
                 self.device = 'cpu'
                 if verbose:
-                    LOGGER.warning('Neither CUDA nor MPS are available - defaulting to CPU. Note: This module is much faster with a GPU.')
+                    LOGGER.warning('Neither CUDA nor MPS/SDAA are available - defaulting to CPU. Note: This module is much faster with a GPU.')
         else:
             self.device = gpu
 

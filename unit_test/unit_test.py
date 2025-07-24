@@ -103,7 +103,10 @@ class UnitTest:
         reader =  self.easyocr.Reader(language)
         _, pred, confidence = reader.readtext(image)[0]
         reader = None
-        torch.cuda.empty_cache()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+        elif torch.sdaa.is_available():
+            torch.sdaa.empty_cache()
         return pred, confidence
     
     def set_easyocr(self):
@@ -193,6 +196,9 @@ class UnitTest:
                 
                 test['input'] = [(self.get_nested_attr(self, '.'.join(input_.split('.')[1:])) 
                                  if input_.startswith('unit_test.') else input_) if isinstance(input_, str) else input_ for input_ in test['input']]
+                # 判读input参数中是否有cuda文字，如果有替换为sdaa
+                if torch.sdaa.is_available():
+                    test['input'] = ['sdaa' if isinstance(input_, str) and input_ == 'cuda' else input_ for input_ in test['input']]
                 if verbose > 3:
                     print("###### Input: {}".format(test['input']))
                 results = test_method(*test['input'])

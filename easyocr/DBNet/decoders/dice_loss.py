@@ -130,7 +130,12 @@ class InstanceDiceLoss(DiceLoss):
 
     def forward(self, pred, gt, mask):
         # pred_label_maps: N, P, H, W, where P is the number of regions.
-        torch.cuda.synchronize()
+        if torch.cuda.is_available():
+            torch.cuda.synchronize()
+        elif torch.sdaa.is_available():
+            torch.sdaa.synchronize()
+        else:
+            raise RuntimeError('Neither CUDA nor SDAA are available.')
         pred_label_maps, _ = self.label(pred > self.threshold)
         gt_label_maps, _ = self.label(gt)
 
